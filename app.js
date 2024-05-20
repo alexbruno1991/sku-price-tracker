@@ -1,35 +1,35 @@
-document.getElementById('sku-form').addEventListener('submit', function(event) {
+document.getElementById('asin-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    const sku = document.getElementById('sku').value;
+    const asin = document.getElementById('asin').value;
     const mapPrice = parseFloat(document.getElementById('map-price').value).toFixed(2);
     
-    const skuList = document.getElementById('sku-list');
-    const skuItem = document.createElement('div');
-    skuItem.className = 'sku-item';
-    skuItem.innerHTML = `
-        <p>SKU: ${sku}</p>
+    const asinList = document.getElementById('asin-list');
+    const asinItem = document.createElement('div');
+    asinItem.className = 'asin-item';
+    asinItem.innerHTML = `
+        <p>ASIN: ${asin}</p>
         <p>MAP Price: $${mapPrice}</p>
     `;
     
-    skuList.appendChild(skuItem);
+    asinList.appendChild(asinItem);
     
-    document.getElementById('sku-form').reset();
+    document.getElementById('asin-form').reset();
 });
 
 document.getElementById('refresh-button').addEventListener('click', function() {
-    const skuItems = document.querySelectorAll('.sku-item');
+    const asinItems = document.querySelectorAll('.asin-item');
     const results = document.getElementById('results');
     results.innerHTML = '';
-    skuItems.forEach(item => {
-        const sku = item.querySelector('p:nth-child(1)').innerText.split(': ')[1];
+    asinItems.forEach(item => {
+        const asin = item.querySelector('p:nth-child(1)').innerText.split(': ')[1];
         const mapPrice = parseFloat(item.querySelector('p:nth-child(2)').innerText.split(': ')[1].replace('$', ''));
-        checkAmazonPrice(sku, mapPrice);
+        checkAmazonPrice(asin, mapPrice);
     });
 });
 
-function checkAmazonPrice(sku, mapPrice) {
+function checkAmazonPrice(asin, mapPrice) {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const amazonUrl = `https://www.amazon.com/dp/${sku}`;
+    const amazonUrl = `https://www.amazon.com/dp/${asin}`;
     
     axios.get(proxyUrl + amazonUrl)
         .then(response => {
@@ -42,14 +42,14 @@ function checkAmazonPrice(sku, mapPrice) {
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
                 resultItem.innerHTML = `
-                    <p>SKU: ${sku}</p>
+                    <p>ASIN: ${asin}</p>
                     <p>Current Price: $${price.toFixed(2)}</p>
                     <p>MAP Price: $${mapPrice}</p>
-                    <a href="https://www.amazon.com/dp/${sku}" target="_blank">View on Amazon</a>
+                    <a href="https://www.amazon.com/dp/${asin}" target="_blank">View on Amazon</a>
                 `;
                 document.getElementById('results').appendChild(resultItem);
             } else if (!price) {
-                console.error(`Price not found for SKU: ${sku}`);
+                console.error(`Price not found for ASIN: ${asin}`);
             }
         })
         .catch(error => {

@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKU Price Tracker</title>
+    <title>ASIN Price Tracker</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>SKU Price Tracker</h1>
+        <h1>ASIN Price Tracker</h1>
     </header>
     <main>
-        <form id="sku-form">
-            <label for="sku">SKU:</label>
-            <input type="text" id="sku" name="sku" required>
+        <form id="asin-form">
+            <label for="asin">ASIN:</label>
+            <input type="text" id="asin" name="asin" required>
             <label for="map-price">MAP Price:</label>
             <input type="number" id="map-price" name="map-price" step="0.01" required>
-            <button type="submit">Add SKU</button>
+            <button type="submit">Add ASIN</button>
         </form>
         <button id="refresh-button">Refresh</button>
-        <div id="sku-list"></div>
+        <div id="asin-list"></div>
         <div id="results"></div>
     </main>
     <script src="app.js"></script>
