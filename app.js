@@ -1,38 +1,38 @@
-document.getElementById('asin-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.getElementById('refresh').addEventListener('click', async () => {
     const asin = document.getElementById('asin').value;
-    const mapPrice = parseFloat(document.getElementById('map-price').value).toFixed(2);
+    const mapPrice = document.getElementById('mapPrice').value;
     
-    const asinList = document.getElementById('asin-list');
-    const asinItem = document.createElement('div');
-    asinItem.className = 'asin-item';
-    asinItem.innerHTML = `
-        <p>ASIN: ${asin}</p>
-        <p>MAP Price: $${mapPrice}</p>
-    `;
-    
-    asinList.appendChild(asinItem);
-    
-    document.getElementById('asin-form').reset();
-});
+    if (asin && mapPrice) {
+        const response = await fetch(`/scrape?asin=${asin}&mapPrice=${mapPrice}`);
+        const data = await response.json();
 
-document.getElementById('refresh-button').addEventListener('click', function() {
-    const asinItems = document.querySelectorAll('.asin-item');
-    const results = document.getElementById('results');
-    results.innerHTML = '';
-    asinItems.forEach(item => {
-        const asin = item.querySelector('p:nth-child(1)').innerText.split(': ')[1];
-        const mapPrice = parseFloat(item.querySelector('p:nth-child(2)').innerText.split(': ')[1].replace('$', ''));
-        checkAmazonPrice(asin, mapPrice);
-    });
-});
+        const tableBody = document.querySelector('#resultsTable tbody');
+        tableBody.innerHTML = ''; // Clear previous results
 
-function checkAmazonPrice(asin, mapPrice) {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const amazonUrl = `https://www.amazon.com/dp/${asin}`;
-    
-    console.log(`Fetching price for ASIN: ${asin} with MAP Price: $${mapPrice}`);
-    
-    axios.get(proxyUrl + amazonUrl)
-        .then(response => {
-            console.log
+        if (data) {
+            const mainRow = document.createElement('tr');
+            mainRow.innerHTML = `
+                <td>${data.vendor}</td>
+                <td>${data.price}</td>
+                <td>${data.asin}</td>
+                <td><a href="${data.url}" target="_blank">Product Link</a></td>
+            `;
+            tableBody.appendChild(mainRow);
+
+            if (data.otherSellers && data.otherSellers.length > 0) {
+                data.otherSellers.forEach(seller => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${seller.seller}</td>
+                        <td>${seller.price}</td>
+                        <td>${data.asin}</td>
+                        <td><a href="${data.url}" target="_blank">Product Link</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+    } else {
+        alert('Please enter a valid ASIN and MAP Price.');
+    }
+});
