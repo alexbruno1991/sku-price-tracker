@@ -35,27 +35,4 @@ function checkAmazonPrice(asin, mapPrice) {
     
     axios.get(proxyUrl + amazonUrl)
         .then(response => {
-            console.log('Response received from Amazon:', response);
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(response.data, 'text/html');
-            const priceElement = doc.querySelector('#priceblock_ourprice, #priceblock_dealprice');
-            const price = priceElement ? parseFloat(priceElement.innerText.replace('$', '')) : null;
-
-            if (price && price < mapPrice) {
-                const resultItem = document.createElement('div');
-                resultItem.className = 'result-item';
-                resultItem.innerHTML = `
-                    <p>ASIN: ${asin}</p>
-                    <p>Current Price: $${price.toFixed(2)}</p>
-                    <p>MAP Price: $${mapPrice}</p>
-                    <a href="https://www.amazon.com/dp/${asin}" target="_blank">View on Amazon</a>
-                `;
-                document.getElementById('results').appendChild(resultItem);
-            } else if (!price) {
-                console.error(`Price not found for ASIN: ${asin}`);
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data from Amazon:', error);
-        });
-}
+            console.log

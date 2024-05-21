@@ -11,9 +11,52 @@
     <header>
         <div class="container">
             <h1>ASIN Price Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
     <main class="container">
+        <section id="home">
+            <h2>Home</h2>
+            <p>Welcome to ASIN Price Tracker! Our goal is to help vendors track the prices of their products on Amazon to ensure compliance with MAP (Minimum Advertised Price) policies.</p>
+        </section>
+        <section id="features">
+            <h2>Features</h2>
+            <p>We provide the following features:</p>
+            <ul>
+                <li>Real-time price tracking</li>
+                <li>Detailed vendor reports</li>
+                <li>Automated notifications</li>
+            </ul>
+        </section>
+        <section id="blog">
+            <h2>Blog</h2>
+            <p>Read our latest articles on price tracking, vendor management, and more.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send</button>
+            </form>
+        </section>
         <section class="form-section">
             <h2>Add ASIN</h2>
             <form id="asin-form">
