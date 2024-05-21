@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIN Price Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ASIN Price Tracker</h1>
+    </header>
+    <main>
+        <form id="asinForm">
+            <label for="asin">ASIN:</label>
+            <input type="text" id="asin" name="asin" required>
+            <label for="mapPrice">MAP Price:</label>
+            <input type="number" id="mapPrice" name="mapPrice" required>
+            <button type="button" id="addAsin">Add ASIN</button>
+        </form>
+        <button id="refresh">Refresh</button>
+        
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Seller Name</th>
+                    <th>Price</th>
+                    <th>ASIN</th>
+                    <th>Product URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Results will be appended here -->
+            </tbody>
+        </table>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
