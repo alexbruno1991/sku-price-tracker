@@ -32,6 +32,28 @@ label, input, button {
     margin: 0.5em 0;
 }
 
+#asinContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.asin-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.asin-entry input {
+    margin-right: 0.5em;
+}
+
+.remove-asin {
+    margin-left: 0.5em;
+    color: red;
+    cursor: pointer;
+}
+
 #resultsTable {
     width: 100%;
     border-collapse: collapse;
