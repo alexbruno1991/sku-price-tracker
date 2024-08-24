@@ -7,7 +7,6 @@ app.use(express.static('public'));
 
 app.get('/scrape', async (req, res) => {
     const asin = req.query.asin;
-    const mapPrice = req.query.mapPrice;
 
     const data = await scrapeAmazon(asin);
     res.json(data);
@@ -94,4 +93,14 @@ async function scrapeAmazon(asin) {
             return sellers;
         });
 
-        result.other
+        result.otherSellers = otherSellers;
+    }
+
+    await browser.close();
+    return result;
+}
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
