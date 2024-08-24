@@ -94,13 +94,4 @@ async function scrapeAmazon(asin) {
             return sellers;
         });
 
-        result.otherSellers = otherSellers;
-    }
-
-    await browser.close();
-    return result;
-}
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+        result.other

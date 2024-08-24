@@ -14,12 +14,15 @@
         <form id="asinForm">
             <label for="asin">ASIN:</label>
             <input type="text" id="asin" name="asin" required>
-            <label for="mapPrice">MAP Price:</label>
-            <input type="number" id="mapPrice" name="mapPrice" required>
             <button type="button" id="addAsin">Add ASIN</button>
         </form>
-        <div id="asinContainer"></div>
-        <button id="refresh">Refresh</button>
+        
+        <div id="asinContainer">
+            <h3>Tracking ASINs:</h3>
+            <ul id="asinList"></ul>
+        </div>
+
+        <button id="search">Search</button>
         
         <table id="resultsTable">
             <thead>
